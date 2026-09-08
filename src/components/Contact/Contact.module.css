@@ -1,0 +1,234 @@
+/* ── Contact — Aurora: violet + pink + blue + cyan ── */
+.contact {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--grad-contact);
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-primary), var(--border-secondary), transparent);
+  opacity: 0.45;
+}
+
+/* Large aurora orb — centred, behind everything */
+.bgGlow {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 550px;
+  border-radius: 50%;
+  background: var(--grad-contact-orb);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0%   { transform: translateX(-50%) scaleX(1) scaleY(1); opacity: 0.8; }
+  50%  { transform: translateX(-45%) scaleX(1.05) scaleY(0.95); opacity: 1; }
+  100% { transform: translateX(-55%) scaleX(0.95) scaleY(1.05); opacity: 0.9; }
+}
+
+.contact > * { position: relative; z-index: 1; }
+
+/* ── Header ── */
+.header { margin-bottom: 4rem; }
+
+/* "Let's Build Something" — aurora gradient */
+.ctaHeading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+}
+
+/* "Great." — full aurora gradient with glow */
+.ctaAccent {
+  background: var(--grad-contact-cta);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 30px var(--primary-glow-md));
+  animation: ctaGradShift 5s linear infinite;
+}
+
+@keyframes ctaGradShift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.ctaSub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 440px;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Info panel ── */
+.infoPanel { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
+}
+
+a.infoItem:hover {
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-primary);
+  transform: translateX(5px);
+}
+
+.infoItemStatic   { cursor: default; }
+.infoItemDisabled { opacity: 0.4; cursor: default; }
+
+/* Icon wrap — per-item gradient background */
+.infoIconWrap {
+  color: var(--primary);
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  background: var(--primary-glow);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+a.infoItem:hover .infoIconWrap {
+  background: var(--primary-glow-md);
+  box-shadow: 0 0 12px var(--primary-glow-md);
+}
+
+.infoText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+
+.infoLabel {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.infoValue      { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); word-break: break-all; }
+.infoValueMuted { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+
+.infoArrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.15s, color 0.15s !important;
+}
+a.infoItem:hover .infoArrow { transform: translateX(3px); color: var(--primary); }
+
+/* ── Form — aurora glass panel ── */
+.form {
+  background: var(--bg-glass);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle aurora gradient at top of form */
+.form::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad-contact-cta);
+  background-size: 200% 100%;
+  animation: ctaGradShift 5s linear infinite;
+  opacity: 0.6;
+}
+
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.formGroup { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.input,
+.textarea {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  padding: 0.8rem 1rem;
+  resize: none;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+.input::placeholder, .textarea::placeholder { color: var(--text-muted); }
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.input:disabled, .textarea:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.submitBtn { align-self: flex-start; gap: 0.65rem; }
+
+.msgInfo    { font-size: 0.85rem; color: var(--text-muted); }
+.msgSuccess { font-size: 0.88rem; color: var(--emerald); font-weight: 600; }
+.msgError   { font-size: 0.88rem; color: #f87171; font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .submitBtn { align-self: stretch; justify-content: center; }
+  .bgGlow { width: 100vw; height: 300px; }
+}
+@media (max-width: 540px) {
+  .formRow { grid-template-columns: 1fr; }
+  .form    { padding: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgGlow { animation: none !important; }
+  .ctaAccent { animation: none !important; }
+  .form::before { animation: none !important; }
+}

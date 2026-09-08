@@ -1,0 +1,225 @@
+/* ── Hide on touch devices ── */
+@media (hover: none) {
+  .dot, .ring { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════
+   CENTRAL DOT — crosshair design
+═══════════════════════════════════════════════ */
+.dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+
+  /* Centre the dot at cursor tip */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The solid centre square/circle */
+.dot::before {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.6);
+  transition: width 0.18s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)),
+              height 0.18s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)),
+              border-radius 0.18s ease,
+              background 0.18s ease !important;
+}
+
+/* ── Crosshair arms ── */
+.arm {
+  position: absolute;
+  background: var(--primary, #8b5cf6);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.25s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) !important;
+}
+
+.arm[data-dir="top"],
+.arm[data-dir="bottom"] {
+  width: 1.5px; height: 7px;
+  left: 50%; transform: translateX(-50%) scaleY(0);
+  transform-origin: center;
+}
+
+.arm[data-dir="top"]    { bottom: calc(50% + 4px); transform-origin: bottom center; }
+.arm[data-dir="bottom"] { top:    calc(50% + 4px); transform-origin: top center; }
+
+.arm[data-dir="left"],
+.arm[data-dir="right"] {
+  height: 1.5px; width: 7px;
+  top: 50%; transform: translateY(-50%) scaleX(0);
+  transform-origin: center;
+}
+
+.arm[data-dir="left"]  { right: calc(50% + 4px); transform-origin: right center; }
+.arm[data-dir="right"] { left:  calc(50% + 4px); transform-origin: left center; }
+
+/* ── IDLE state (default) ── */
+.dot_idle::before {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ── HOVER state — crosshair appears ── */
+.dot_hover::before {
+  width: 5px; height: 5px;
+  border-radius: 1px; /* slight square */
+  background: var(--primary, #8b5cf6);
+  box-shadow: 0 0 10px var(--primary-glow-md, rgba(139,92,246,0.35));
+}
+
+.dot_hover .arm {
+  opacity: 1;
+  background: var(--primary, #8b5cf6);
+}
+
+.dot_hover .arm[data-dir="top"]    { transform: translateX(-50%) scaleY(1); }
+.dot_hover .arm[data-dir="bottom"] { transform: translateX(-50%) scaleY(1); }
+.dot_hover .arm[data-dir="left"]   { transform: translateY(-50%) scaleX(1); }
+.dot_hover .arm[data-dir="right"]  { transform: translateY(-50%) scaleX(1); }
+
+/* ── CLICK state ── */
+.dot_click::before {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(255,255,255,0.9);
+}
+
+.dot_click .arm { opacity: 0; }
+
+/* ═══════════════════════════════════════════════
+   LAGGED RING
+═══════════════════════════════════════════════ */
+.ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* subtle base ring */
+  border: 1px solid rgba(255,255,255,0.12);
+  transition:
+    width  0.3s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)),
+    height 0.3s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)),
+    border-color 0.25s ease !important;
+}
+
+/* ── Gradient arc ── */
+.arc {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+
+  /* conic gradient stroke — creates arc effect */
+  background:
+    conic-gradient(
+      from 0deg,
+      var(--primary, #8b5cf6)    0deg,
+      var(--secondary, #22d3ee) 120deg,
+      var(--pink, #ec4899)      240deg,
+      var(--primary, #8b5cf6)   360deg
+    )
+    border-box;
+
+  /* Mask: only show the border, not the fill */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  opacity: 0.55;
+  animation: arcSpin 3s linear infinite;
+  transition: opacity 0.25s ease !important;
+}
+
+@keyframes arcSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Click ripple ── */
+.ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--primary, #8b5cf6);
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+}
+
+/* ── IDLE ring ── */
+.ring_idle {
+  width: 38px; height: 38px;
+  border-color: rgba(255,255,255,0.10);
+}
+
+.ring_idle .arc {
+  opacity: 0.40;
+  animation-duration: 3.5s;
+}
+
+/* ── HOVER ring — expands, arc speeds up, glow appears ── */
+.ring_hover {
+  width: 52px; height: 52px;
+  border-color: transparent;
+  box-shadow: 0 0 0 1px var(--border-primary, rgba(139,92,246,0.3)),
+              0 0 20px var(--primary-glow-md, rgba(139,92,246,0.25));
+}
+
+.ring_hover .arc {
+  opacity: 0.9;
+  animation-duration: 1.4s; /* faster on hover */
+  inset: -1.5px;
+  border-width: 2px;
+}
+
+/* ── CLICK ring — compress + ripple ── */
+.ring_click {
+  width: 28px; height: 28px;
+  border-color: var(--primary, #8b5cf6);
+  box-shadow: 0 0 14px var(--primary-glow-lg, rgba(139,92,246,0.5));
+}
+
+.ring_click .arc {
+  opacity: 1;
+  animation-duration: 0.6s;
+}
+
+.ring_click .ripple {
+  animation: rippleOut 0.45s ease-out forwards;
+}
+
+@keyframes rippleOut {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(2.2); }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .arc    { animation: none !important; }
+  .ripple { animation: none !important; }
+  .dot::before, .ring { transition: none !important; }
+}

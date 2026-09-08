@@ -1,0 +1,383 @@
+/* ── Projects — each has its own visual identity ── */
+.projects { position: relative; z-index: 1; }
+
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-primary), var(--border-secondary), transparent);
+  opacity: 0.4;
+}
+
+.list { display: flex; flex-direction: column; gap: 2.25rem; }
+
+/* ── Card base ── */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s !important;
+  position: relative;
+  cursor: default;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.3s !important;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.card:hover::before { opacity: 1; }
+
+/* ══ HOMZY — blue + cyan + violet identity ══ */
+.cardHomzy::before { background: var(--grad-homzy); }
+.cardHomzy:hover {
+  border-color: var(--border-secondary);
+  box-shadow: 0 24px 64px var(--cyan-glow), 0 0 0 1px var(--border-secondary), var(--shadow-md);
+}
+
+/* Homzy context badge — cyan */
+.cardHomzy .projContext {
+  color: var(--cyan-bright);
+  background: var(--cyan-glow);
+  border-color: var(--border-secondary);
+}
+
+/* Homzy feature arrow — cyan */
+.cardHomzy .featureArrow { color: var(--cyan); }
+
+/* Homzy project number gradient */
+.cardHomzy .projNum {
+  background: var(--grad-homzy);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.6;
+}
+
+/* ══ PET HORIZON — emerald + cyan + blue identity ══ */
+.cardPetHorizon::before { background: var(--grad-pet); }
+.cardPetHorizon:hover {
+  border-color: var(--border-emerald);
+  box-shadow: 0 24px 64px var(--emerald-glow), 0 0 0 1px var(--border-emerald), var(--shadow-md);
+}
+
+.cardPetHorizon .projContext {
+  color: var(--emerald);
+  background: var(--emerald-glow);
+  border-color: var(--border-emerald);
+}
+
+.cardPetHorizon .featureArrow { color: var(--emerald); }
+
+.cardPetHorizon .projNum {
+  background: var(--grad-pet);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.6;
+}
+
+/* ── Content ── */
+.content { padding: 2.5rem; display: flex; flex-direction: column; }
+
+.contentTop { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.85rem; }
+
+/* default projNum — primary gradient */
+.projNum {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0.55;
+}
+
+.projContext {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-glow);
+  border: 1px solid var(--border-primary);
+  border-radius: 20px;
+  padding: 0.18rem 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.projTitle {
+  font-family: var(--font-sans);
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
+}
+
+.projSub  { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem; }
+.projDesc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.78; margin-bottom: 1.25rem; }
+
+.features { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+
+.feature {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* default feature arrow */
+.featureArrow { color: var(--primary); font-size: 0.63rem; flex-shrink: 0; }
+
+.bottom { border-top: 1px solid var(--border); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 0.85rem; }
+.stack  { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.links  { display: flex; gap: 0.75rem; }
+
+/* Homzy link button — cyan */
+.cardHomzy .linkBtn {
+  color: var(--cyan);
+  border-color: var(--border-secondary);
+}
+.cardHomzy .linkBtn:hover {
+  background: var(--cyan);
+  color: #020510;
+  border-color: var(--cyan);
+}
+
+/* PetHorizon link button — emerald */
+.cardPetHorizon .linkBtn {
+  color: var(--emerald);
+  border-color: var(--border-emerald);
+}
+.cardPetHorizon .linkBtn:hover {
+  background: var(--emerald);
+  color: #020510;
+  border-color: var(--emerald);
+}
+
+.linkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.85rem;
+  transition: background 0.15s, color 0.15s, border-color 0.15s !important;
+  text-decoration: none;
+}
+.linkBtn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.linkDisabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.85rem;
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ── Visual panel ── */
+.visual {
+  position: relative;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+}
+
+/* Homzy visual — blue + cyan atmospheric */
+.visualHomzy {
+  background: var(--grad-homzy-vis);
+}
+
+.visualHomzy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(34,211,238,0.03) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* PetHorizon visual — emerald + cyan atmospheric */
+.visualPetHorizon {
+  background: var(--grad-pet-vis);
+}
+
+.visualPetHorizon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,185,129,0.03) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Glow blob at bottom of visual */
+.visualGlow {
+  position: absolute;
+  bottom: -25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+.visualGlowHomzy     { background: radial-gradient(circle, rgba(34,211,238,0.22) 0%, transparent 70%); }
+.visualGlowPetHorizon{ background: radial-gradient(circle, rgba(16,185,129,0.20) 0%, transparent 70%); }
+
+/* ── Preview elements ── */
+.preview {
+  position: relative;
+  width: 100%; height: 100%;
+  min-height: 340px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1;
+}
+
+.prevGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.55;
+}
+
+/* ── Homzy preview — blue/cyan UI elements ── */
+.homzySearch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  padding: 0.5rem 0.85rem;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(8px);
+}
+.homzySearchIcon { font-size: 0.85rem; color: var(--cyan); }
+.homzySearchText { font-family: var(--font-mono); font-size: 0.63rem; color: var(--text-muted); }
+
+.homzyCards { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; position: relative; z-index: 1; }
+
+.homzyCard {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.65rem;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s !important;
+}
+.homzyCard:hover { border-color: var(--border-secondary); }
+
+.homzyImg {
+  width: 44px; height: 34px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--blue-dim), var(--cyan-dim));
+}
+
+.homzyLines { display: flex; flex-direction: column; gap: 0.3rem; }
+.homzyLine  { height: 4px; background: var(--border); border-radius: 2px; }
+.homzyPrice { width: 42px; height: 6px; background: var(--cyan-dim); border-radius: 3px; opacity: 0.45; }
+
+/* ── Pet Horizon preview — emerald/cyan UI elements ── */
+.petNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--border-emerald);
+  position: relative; z-index: 1;
+}
+.petLogo {
+  width: 60px; height: 8px;
+  background: linear-gradient(90deg, var(--emerald), var(--cyan));
+  border-radius: 4px;
+  opacity: 0.55;
+}
+.petNavLinks { display: flex; gap: 0.5rem; }
+.petNavLink  { width: 28px; height: 5px; background: var(--border); border-radius: 3px; }
+
+.petCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  flex: 1;
+  position: relative; z-index: 1;
+}
+
+.petCard {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s !important;
+}
+.petCard:hover { border-color: var(--border-emerald); }
+
+.petAvatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--emerald-dim), var(--cyan));
+  margin-bottom: 0.25rem;
+}
+.petLine  { width: 80%; height: 4px; background: var(--border); border-radius: 2px; }
+.petBadge {
+  width: 40px; height: 14px;
+  border-radius: 7px;
+  background: var(--emerald-glow);
+  border: 1px solid var(--border-emerald);
+  margin-top: 0.15rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+  .card { grid-template-columns: 1fr; }
+  .visual { border-left: none; border-top: 1px solid var(--border); min-height: 240px; }
+}
+@media (max-width: 480px) {
+  .content { padding: 1.75rem 1.25rem; }
+  .visual  { min-height: 200px; }
+}

@@ -1,0 +1,206 @@
+/* ── Skills — Digital Technology: deep blue + cyan + emerald ── */
+.skills {
+  position: relative;
+  z-index: 1;
+  background: var(--grad-skills);
+}
+
+.skills::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-secondary), var(--border-primary), transparent);
+  opacity: 0.4;
+}
+
+/* Subtle tech grid overlay */
+.skills::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34,211,238,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,211,238,0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skills > * { position: relative; z-index: 1; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* ── Card base ── */
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s !important;
+  cursor: default;
+}
+
+/* Top gradient accent line — per category */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.25s !important;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+.card:hover::before { opacity: 1; }
+
+/* ── Per-category gradient identities ── */
+/* Programming — cyan + blue */
+.catProgramming::before { background: var(--grad-skills-prog); }
+.catProgramming:hover {
+  border-color: var(--border-secondary);
+  box-shadow: 0 16px 48px var(--cyan-glow), 0 0 0 1px var(--border-secondary);
+}
+
+/* Frontend — blue + indigo */
+.catFrontend::before { background: var(--grad-skills-fe); }
+.catFrontend:hover {
+  border-color: var(--border-blue);
+  box-shadow: 0 16px 48px var(--blue-glow), 0 0 0 1px var(--border-blue);
+}
+
+/* Backend — violet + pink */
+.catBackend::before { background: var(--grad-skills-be); }
+.catBackend:hover {
+  border-color: var(--border-primary);
+  box-shadow: 0 16px 48px var(--violet-glow), 0 0 0 1px var(--border-primary);
+}
+
+/* Cloud & DevOps — full hero gradient, full width, featured */
+.catCloud::before { background: var(--grad-skills-cloud); }
+.catCloud:hover {
+  border-color: var(--border-primary);
+  box-shadow: 0 20px 60px var(--violet-glow), 0 0 40px var(--cyan-glow), 0 0 0 1px var(--border-primary);
+}
+
+/* Featured: Cloud & DevOps spans full width */
+.cardFeatured {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg,
+    var(--bg-card) 0%,
+    rgba(139,92,246,0.04) 50%,
+    rgba(34,211,238,0.02) 100%
+  );
+  border-color: rgba(139,92,246,0.16);
+}
+
+/* Bottom shimmer line on featured card */
+.featuredLine {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: var(--grad-skills-cloud);
+  opacity: 0.4;
+}
+
+/* ── Card header ── */
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.cardLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cardNum {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.cardIcon { font-size: 1.2rem; line-height: 1; }
+
+.cardTitle {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.1rem;
+}
+
+.cardDesc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+.cardCount {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.12;
+  /* per-category count gradient */
+}
+.catProgramming .cardCount { background: var(--grad-skills-prog); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.catFrontend .cardCount    { background: var(--grad-skills-fe);   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.catBackend .cardCount     { background: var(--grad-skills-be);   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.catCloud .cardCount       { background: var(--grad-skills-cloud);-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+.sep {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Tags ── */
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.28rem 0.7rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s !important;
+  cursor: default;
+}
+
+/* Per-category tag hover colors */
+.tagCyan:hover   { background: var(--cyan-glow);   border-color: var(--border-secondary); color: var(--cyan-bright); transform: translateY(-1px); }
+.tagBlue:hover   { background: var(--blue-glow);   border-color: var(--border-blue);      color: var(--blue-bright); transform: translateY(-1px); }
+.tagViolet:hover { background: var(--violet-glow); border-color: var(--border-primary);   color: var(--violet-bright); transform: translateY(-1px); }
+.tagCloud:hover  {
+  background: linear-gradient(135deg, var(--violet-glow), var(--cyan-glow));
+  border-color: var(--border-primary);
+  color: var(--cyan-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .cardFeatured { grid-column: 1; }
+  .skills::after { display: none; }
+}

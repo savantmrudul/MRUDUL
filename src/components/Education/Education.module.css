@@ -1,0 +1,243 @@
+/* ── Education — Frosted: ice blue + lavender (premium in both themes) ── */
+.education {
+  position: relative;
+  z-index: 1;
+  background: var(--grad-edu);
+}
+
+.education::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-primary), var(--border-secondary), transparent);
+  opacity: 0.4;
+}
+
+/* Frosted glass-like background tint in light mode */
+[data-theme="light"] .education {
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(79,70,229,0.04) 30%,
+    rgba(8,145,178,0.03) 70%,
+    rgba(255,255,255,0) 100%
+  );
+}
+
+.timeline { display: flex; flex-direction: column; max-width: 840px; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.entry:last-child { padding-bottom: 0; }
+
+/* ── Spine ── */
+.spine { display: flex; flex-direction: column; align-items: center; }
+
+/* Node — frosted glass circle with per-entry gradient border */
+.node {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  transition: box-shadow 0.25s, transform 0.2s !important;
+  position: relative;
+}
+
+/* Per-entry gradient borders using background-clip trick */
+.nodeMCA {
+  background-image: var(--grad-edu-node-1);
+  background-origin: border-box;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 2px transparent, 0 0 16px var(--violet-glow);
+  /* Use outline border via pseudo */
+}
+.nodeMCA::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--grad-edu-node-1);
+  z-index: -1;
+}
+
+.nodeBCA::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--grad-edu-node-2);
+  z-index: -1;
+}
+.nodeBCA { box-shadow: 0 0 16px var(--cyan-glow); }
+
+.nodePUC::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--grad-edu-node-3);
+  z-index: -1;
+}
+.nodePUC { box-shadow: 0 0 16px var(--blue-glow); }
+
+.nodeSSLC::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--grad-edu-node-4);
+  z-index: -1;
+}
+.nodeSSLC { box-shadow: 0 0 16px var(--indigo-glow); }
+
+/* Inner circle to mask gradient background showing through */
+.node::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  z-index: 0;
+}
+
+.nodeIcon {
+  font-size: 1.15rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.entry:hover .node { transform: scale(1.08); }
+
+/* Connector line — frosted gradient */
+.line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--border-primary), var(--border-secondary), var(--border));
+  margin-top: 6px;
+  opacity: 0.35;
+}
+
+/* ── Card — frosted glass ── */
+.card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.25s, box-shadow 0.25s !important;
+  cursor: default;
+}
+.card:hover {
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-md), 0 0 30px var(--violet-glow);
+}
+
+[data-theme="light"] .card {
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 2px 16px rgba(79,70,229,0.06);
+}
+[data-theme="light"] .card:hover {
+  box-shadow: 0 8px 32px rgba(124,58,237,0.12), 0 0 0 1px var(--border-primary);
+}
+
+.cardMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cardLeft { display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0; }
+
+.entryNum {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.degree {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.institution { font-size: 0.82rem; color: var(--text-secondary); }
+.location    { color: var(--text-muted); }
+
+/* Grade container */
+.grade { text-align: right; flex-shrink: 0; }
+
+/* Grade — each entry has its own gradient, clip included in each rule */
+.entry:nth-child(1) .gradeValue {
+  background: var(--grad-edu-node-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.entry:nth-child(2) .gradeValue {
+  background: var(--grad-edu-node-2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.entry:nth-child(3) .gradeValue {
+  background: var(--grad-edu-node-3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.entry:nth-child(4) .gradeValue {
+  background: var(--grad-edu-node-4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradeValue {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  /* default fallback — overridden by nth-child above */
+  background: var(--grad-edu-grade);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gradeLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .entry { grid-template-columns: 38px 1fr; gap: 0 1rem; }
+  .node  { width: 34px; height: 34px; }
+  .cardMain { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .grade { text-align: left; }
+}

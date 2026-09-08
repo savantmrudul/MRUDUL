@@ -1,0 +1,252 @@
+/* ── Experience — Electric: blue + cyan + violet ── */
+.experience {
+  position: relative;
+  z-index: 1;
+  background: var(--grad-exp);
+}
+
+.experience::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-secondary), var(--border-primary), transparent);
+  opacity: 0.4;
+}
+
+.timeline { display: flex; flex-direction: column; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 1.75rem;
+  padding-bottom: 3rem;
+}
+.entry:last-child { padding-bottom: 0; }
+
+/* ── Spine — electric gradient line ── */
+.spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 0.2rem;
+}
+
+/* Expanding pulse ring */
+.nodePulse {
+  position: absolute;
+  top: -7px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border-secondary);
+  animation: nodeRing 2.5s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes nodeRing {
+  0%   { transform: scale(0.7); opacity: 1; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* Node itself — blue→cyan gradient */
+.node {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--grad-exp-node);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--cyan), 0 0 20px var(--cyan-glow);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Timeline line — electric gradient from node down */
+.line {
+  flex: 1;
+  width: 2px;
+  background: var(--grad-exp-line);
+  margin-top: 6px;
+  opacity: 0.35;
+  border-radius: 1px;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s !important;
+}
+
+/* Top accent — blue→cyan→violet */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad-exp-card);
+  opacity: 0.6;
+}
+
+.card:hover {
+  border-color: var(--border-secondary);
+  box-shadow: 0 8px 40px var(--blue-glow), 0 0 0 1px var(--border-secondary);
+}
+
+/* Card top */
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.roleWrap { flex: 1; }
+
+.role {
+  font-family: var(--font-sans);
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* metaType — electric blue→cyan gradient */
+.metaType {
+  background: var(--grad-exp-node);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+}
+
+.metaSep { color: var(--text-muted); }
+
+.metaPeriod {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.activeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--emerald);
+  background: var(--emerald-glow);
+  border: 1px solid var(--border-emerald);
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  letter-spacing: 0.06em;
+}
+
+.activeDot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--emerald);
+  animation: activePulse 2s ease-in-out infinite;
+}
+
+@keyframes activePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* Faded large number — electric gradient */
+.entryNum {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--grad-exp-card);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.12;
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Bullets */
+.bullets { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
+
+.bullet {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Arrow — cyan */
+.bulletArrow { color: var(--cyan); font-size: 0.68rem; flex-shrink: 0; }
+
+/* Tech row */
+.techRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.techRowLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  padding-top: 0.28rem;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.techTags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* Tech tag — electric: cyan/blue themed */
+.techTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: var(--cyan-glow);
+  color: var(--cyan-bright);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-secondary);
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.15s !important;
+}
+
+.techTag:hover {
+  background: var(--cyan-glow-md);
+  border-color: var(--cyan);
+  color: var(--cyan-bright);
+  box-shadow: 0 0 10px var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .entry { grid-template-columns: 32px 1fr; gap: 0 1rem; }
+  .card  { padding: 1.5rem; }
+  .entryNum { display: none; }
+}
